@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NAV Creations — Modern Crochet Accessories</title>
+  <meta name="description" content="Handcrafted modern crochet accessories — heart earrings, bow scrunchies, hair clips, phone charms, bookmarks and more. Every stitch made by hand. Customisation available." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════════════════ -->
+<nav id="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-brand">
+    <span class="yarn-icon" aria-hidden="true">🧶</span>
+    NAV Creations
+  </div>
+  <div class="nav-actions">
+    <button class="btn-admin" id="adminBtn" aria-label="Admin login">🔐 Admin</button>
+    <button class="btn-cart" id="cartBtn" aria-label="Open cart">
+      🛍️
+      <span class="cart-badge" id="cartCount" style="display:none">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════
+     SHOP VIEW  (hidden when Admin Dashboard is open)
+════════════════════════════════════════════════════════ -->
+<div id="shopView">
+
+  <!-- ── Hero ────────────────────────────────────────────── -->
+  <section id="hero" aria-labelledby="heroTitle">
+    <div class="hero-bg-pattern" aria-hidden="true"></div>
+    <span class="hero-yarn-deco" aria-hidden="true">🧶</span>
+    <span class="hero-yarn-deco" aria-hidden="true">✂️</span>
+    <span class="hero-yarn-deco" aria-hidden="true">🪡</span>
+
+    <div class="hero-tag">🌸 Modern Crochet Accessories</div>
+    <h1 class="hero-title" id="heroTitle">
+      Every Stitch<br><em>Made by Hand</em>
+    </h1>
+    <p class="hero-subtitle">
+      Handcrafted earrings, scrunchies, hair clips &amp; charms — each piece
+      made with love and customisable just for you.
+    </p>
+    <button class="hero-cta" id="heroCta" aria-label="Scroll to products">
+      Shop Collection ↓
+    </button>
+
+    <div class="hero-stats" aria-label="Shop highlights">
+      <div class="hero-stat">
+        <div class="hero-stat-number">53+</div>
+        <div class="hero-stat-label">Posts</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">100%</div>
+        <div class="hero-stat-label">Handmade</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">Custom</div>
+        <div class="hero-stat-label">Orders</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Filter & Search Bar ─────────────────────────────── -->
+  <div id="filterBar" role="search">
+    <div class="search-wrap">
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input
+        type="search"
+        id="searchInput"
+        class="form-input"
+        placeholder="Search earrings, scrunchies, charms…"
+        aria-label="Search products"
+        autocomplete="off"
+      />
+    </div>
+    <div class="category-filters" role="group" aria-label="Filter by category">
+      <button class="filter-btn active" data-category="All" id="filter-all">All</button>
+      <button class="filter-btn" data-category="Earrings" id="filter-earrings">💖 Earrings</button>
+      <button class="filter-btn" data-category="Scrunchies" id="filter-scrunchies">🌿 Scrunchies</button>
+      <button class="filter-btn" data-category="Hair Accessories" id="filter-hair">🎀 Hair Accessories</button>
+      <button class="filter-btn" data-category="Charms &amp; More" id="filter-charms">✨ Charms &amp; More</button>
+    </div>
+  </div>
+
+  <!-- ── Products Section ────────────────────────────────── -->
+  <section id="productsSection" aria-labelledby="productsSectionTitle">
+    <div class="section-header">
+      <h2 class="section-title" id="productsSectionTitle">Our Handmade Collection</h2>
+      <span class="product-count" id="productCount" aria-live="polite"></span>
+    </div>
+    <div id="productsGrid" aria-label="Product listing"></div>
+  </section>
+
+  <!-- ── Footer ──────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-logo">🧶 NAV Creations</div>
+    <p>Modern crochet accessories · <strong>Every stitch made by hand</strong></p>
+    <p style="margin-top:0.4rem;font-size:0.78rem;opacity:0.6">Customisation available · DM to place your order · © 2025</p>
+  </footer>
+
+</div><!-- /shopView -->
+
+
+<!-- ════════════════════════════════════════════════════════
+     CART SIDEBAR + OVERLAY
+════════════════════════════════════════════════════════ -->
+<div id="cartOverlay" class="overlay hidden" aria-hidden="true"></div>
+
+<aside id="cartSidebar" role="complementary" aria-label="Shopping cart">
+  <div class="cart-header">
+    <h2>🛍️ Your Bag</h2>
+    <button class="btn-close-cart" id="closeCartBtn" aria-label="Close cart">✕</button>
+  </div>
+  <div id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-subtotal-row">
+      <span>Subtotal</span>
+      <span id="cartTotal">₹0</span>
+    </div>
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-amount" id="cartTotalDisplay">₹0</span>
+    </div>
+    <button class="btn-checkout" id="checkoutBtn" disabled aria-label="Proceed to checkout">
+      Proceed to Checkout →
+    </button>
+  </div>
+</aside>
+
+
+<!-- ════════════════════════════════════════════════════════
+     ADMIN LOGIN MODAL
+════════════════════════════════════════════════════════ -->
+<div id="adminLoginModal" class="modal-overlay hidden" role="dialog"
+     aria-modal="true" aria-labelledby="adminLoginTitle"
+     onclick="if(event.target===this) closeModal('adminLoginModal')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2 class="modal-title" id="adminLoginTitle">Admin Login</h2>
+      <button class="btn-close-modal" onclick="closeModal('adminLoginModal')"
+              aria-label="Close login dialog">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="login-illustration">🔐</div>
+      <p class="login-subtitle">Sign in to manage your product inventory</p>
+
+      <div id="loginError" class="login-error" role="alert"></div>
+
+      <form id="adminLoginForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="adminUser">Username</label>
+          <input class="form-input" id="adminUser" type="text"
+                 placeholder="Enter username" autocomplete="username" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="adminPass">Password</label>
+          <input class="form-input" id="adminPass" type="password"
+                 placeholder="Enter password" autocomplete="current-password" required />
+        </div>
+        <button class="btn-primary" type="submit" id="loginSubmitBtn">
+          Sign In →
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     CHECKOUT MODAL
+════════════════════════════════════════════════════════ -->
+<div id="checkoutModal" class="modal-overlay hidden" role="dialog"
+     aria-modal="true" aria-labelledby="checkoutTitle"
+     onclick="if(event.target===this) closeModal('checkoutModal')">
+  <div class="modal-box" style="max-width:640px">
+    <div class="modal-header">
+      <h2 class="modal-title" id="checkoutTitle">🛒 Checkout</h2>
+      <button class="btn-close-modal" onclick="closeModal('checkoutModal')"
+              aria-label="Close checkout">✕</button>
+    </div>
+
+    <form id="checkoutForm" novalidate>
+      <div class="checkout-grid">
+
+        <!-- Delivery Details -->
+        <div class="checkout-form-section">
+          <h3>Delivery Details</h3>
+
+          <div class="form-group">
+            <label class="form-label" for="checkoutName">Full Name *</label>
+            <input class="form-input" id="checkoutName" type="text"
+                   placeholder="Priya Sharma" required />
+            <span class="form-error">This field is required.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="checkoutPhone">Phone Number *</label>
+            <input class="form-input" id="checkoutPhone" type="tel"
+                   placeholder="10-digit mobile number" maxlength="10" required />
+            <span class="form-error">Enter a valid 10-digit number.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="checkoutEmail">Email Address *</label>
+            <input class="form-input" id="checkoutEmail" type="email"
+                   placeholder="you@example.com" required />
+            <span class="form-error">Enter a valid email address.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="checkoutAddress">Delivery Address *</label>
+            <textarea class="form-input form-textarea" id="checkoutAddress"
+                      placeholder="House/Flat No., Street, City, State, PIN code"
+                      rows="4" required></textarea>
+            <span class="form-error">This field is required.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="checkoutNotes">Order Notes (optional)</label>
+            <textarea class="form-input form-textarea" id="checkoutNotes"
+                      placeholder="Any special instructions for your order…"
+                      rows="2"></textarea>
+          </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="checkout-summary-section">
+          <h3>Order Summary</h3>
+          <div id="orderSummaryItems"></div>
+          <hr class="order-summary-divider" />
+          <div class="order-summary-total">
+            <span>Total</span>
+            <span class="order-summary-total-amount" id="orderTotal">₹0</span>
+          </div>
+
+          <div style="margin-top:1.5rem;padding:1rem;background:var(--cream);border-radius:var(--radius-md);border:1px solid rgba(201,132,122,0.2)">
+            <p style="font-size:0.8rem;color:var(--text-muted);line-height:1.6">
+              💳 <strong>Payment:</strong> Payment details will be shared after order confirmation via WhatsApp/Email.
+              <br><br>
+              🚚 <strong>Delivery:</strong> 5–8 working days after confirmation.
+            </p>
+          </div>
+        </div>
+
+      </div><!-- /checkout-grid -->
+
+      <div class="checkout-footer">
+        <button class="btn-primary" type="submit" id="placeOrderBtn">
+          Place Order ✓
+        </button>
+        <p class="checkout-note">
+          By placing your order you agree to be contacted for payment & delivery.
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     ORDER CONFIRMED MODAL
+════════════════════════════════════════════════════════ -->
+<div id="orderConfirmedModal" class="modal-overlay hidden" role="dialog"
+     aria-modal="true" aria-labelledby="orderConfirmedTitle">
+  <div class="modal-box" style="max-width:420px">
+    <div class="order-confirmed-content">
+      <div class="confirmed-icon" aria-hidden="true">🎉</div>
+      <h2 class="confirmed-title" id="orderConfirmedTitle">
+        Order Placed!
+      </h2>
+      <p class="confirmed-subtitle">
+        Thank you, <strong id="confirmedName"></strong>! Your order has been received.
+        We'll reach out shortly with payment &amp; delivery details.
+      </p>
+      <div class="confirmed-id" aria-label="Order ID">
+        Order ID: <span id="confirmedOrderId"></span>
+      </div>
+      <div style="padding:0.8rem 1.2rem;background:var(--cream);border-radius:var(--radius-md);text-align:left;font-size:0.82rem;color:var(--text-muted);line-height:1.7;width:100%">
+        🧶 Your handmade items are now being prepared.<br>
+        📲 Expect a WhatsApp/email within 24 hours.<br>
+        🚚 Delivery in 5–8 working days.
+      </div>
+      <button class="btn-continue" id="continueShoppingBtn"
+              onclick="closeModal('orderConfirmedModal')"
+              aria-label="Continue shopping">
+        Continue Shopping →
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     ADMIN DASHBOARD
+════════════════════════════════════════════════════════ -->
+<section id="adminDashboard" class="hidden" aria-label="Admin dashboard">
+  <div class="admin-topbar">
+    <div class="admin-topbar-left">
+      <h2>⚙️ Admin Dashboard</h2>
+      <p>Manage your crochet inventory — add, edit, and track products.</p>
+    </div>
+    <div style="display:flex;gap:0.75rem;align-items:center">
+      <button class="btn-add-product" id="addProductBtn" aria-label="Add new product">
+        + Add Product
+      </button>
+      <button class="btn-logout" id="adminLogoutBtn" aria-label="Logout from admin">
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="admin-stats">
+    <div class="stat-card">
+      <div class="stat-card-icon">📦</div>
+      <div class="stat-card-number" id="statTotal">0</div>
+      <div class="stat-card-label">Total Products</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-icon">✅</div>
+      <div class="stat-card-number" id="statInStock">0</div>
+      <div class="stat-card-label">In Stock</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-icon">⚠️</div>
+      <div class="stat-card-number" id="statOutStock">0</div>
+      <div class="stat-card-label">Out of Stock</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-icon">🏷️</div>
+      <div class="stat-card-number" id="statCategories">0</div>
+      <div class="stat-card-label">Categories</div>
+    </div>
+  </div>
+
+  <!-- Product Table -->
+  <div class="admin-table-section">
+    <div class="admin-table-header">
+      <h3>Product Inventory</h3>
+      <span style="font-size:0.8rem;color:var(--text-muted)">Use toggles to change availability instantly</span>
+    </div>
+    <div class="admin-table-wrap">
+      <table class="admin-table" aria-label="Product inventory table">
+        <thead>
+          <tr>
+            <th style="width:52px"></th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Available</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="adminTableBody">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section><!-- /adminDashboard -->
+
+
+<!-- ════════════════════════════════════════════════════════
+     ADD / EDIT PRODUCT MODAL
+════════════════════════════════════════════════════════ -->
+<div id="productFormModal" class="modal-overlay hidden" role="dialog"
+     aria-modal="true" aria-labelledby="productFormTitle"
+     onclick="if(event.target===this) closeModal('productFormModal')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2 class="modal-title" id="productFormTitle">Add New Product</h2>
+      <button class="btn-close-modal" onclick="closeModal('productFormModal')"
+              aria-label="Close form">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="productForm" novalidate>
+
+        <div class="form-group">
+          <label class="form-label" for="productFormName">Product Name *</label>
+          <input class="form-input" id="productFormName" type="text"
+                 placeholder="e.g. Bunny Plushie" required />
+          <span class="form-error">Product name is required.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="productFormDesc">Description *</label>
+          <textarea class="form-input form-textarea" id="productFormDesc"
+                    placeholder="Describe this product…" required></textarea>
+          <span class="form-error">Description is required.</span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="productFormPrice">Price (₹) *</label>
+            <input class="form-input" id="productFormPrice" type="number"
+                   placeholder="e.g. 599" min="1" step="1" required />
+            <span class="form-error">Enter a valid price.</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="productFormStock">Stock Count *</label>
+            <input class="form-input" id="productFormStock" type="number"
+                   placeholder="e.g. 10" min="0" step="1" value="10" required />
+            <span class="form-error">Enter a valid stock count.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="productFormCategory">Category *</label>
+          <select class="form-input form-select" id="productFormCategory" required>
+            <option value="">— Select a category —</option>
+            <option value="Plushies">🐰 Plushies</option>
+            <option value="Bags">👜 Bags</option>
+            <option value="Apparel">🧣 Apparel</option>
+            <option value="Home Decor">🏺 Home Decor</option>
+          </select>
+          <span class="form-error">Select a category.</span>
+        </div>
+
+        <div class="form-group" style="flex-direction:row;align-items:center;gap:0.75rem">
+          <label class="toggle" for="productFormAvailable" title="Mark as available">
+            <input type="checkbox" id="productFormAvailable" checked />
+            <span class="toggle-slider"></span>
+          </label>
+          <span style="font-size:0.9rem;font-weight:500;color:var(--text-main)">Available for purchase</span>
+        </div>
+
+        <div style="display:flex;gap:0.75rem;margin-top:0.5rem">
+          <button class="btn-primary" type="submit" id="saveProductBtn">
+            Save Product ✓
+          </button>
+          <button type="button" onclick="closeModal('productFormModal')"
+                  style="flex:1;padding:0.85rem;border:1.5px solid rgba(201,132,122,0.3);border-radius:var(--radius-md);background:transparent;color:var(--text-muted);font-size:0.9rem;cursor:pointer;transition:var(--transition)"
+                  onmouseover="this.style.borderColor='var(--rose)'"
+                  onmouseout="this.style.borderColor='rgba(201,132,122,0.3)'">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     TOAST NOTIFICATION
+════════════════════════════════════════════════════════ -->
+<div id="toast" role="status" aria-live="polite"></div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SCRIPTS  (order matters: data → admin → app)
+════════════════════════════════════════════════════════ -->
+<script src="data.js"></script>
+<script src="admin.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
