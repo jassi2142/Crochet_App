@@ -55,6 +55,9 @@ function bindEvents() {
 
   // Product form (admin)
   document.getElementById('productForm').addEventListener('submit', submitProductForm);
+  document.getElementById('productFormImage').addEventListener('input', e => {
+    updateImagePreview(e.target.value);
+  });
   document.querySelectorAll('.form-group input, .form-group select, .form-group textarea').forEach(el => {
     el.addEventListener('input', () => {
       el.closest('.form-group')?.classList.remove('error');

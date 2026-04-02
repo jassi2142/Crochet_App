@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NAV Creations — Modern Crochet Accessories</title>
-  <meta name="description" content="Handcrafted modern crochet accessories — heart earrings, bow scrunchies, hair clips, phone charms, bookmarks and more. Every stitch made by hand. Customisation available." />
+  <title>NAV Creations — Serene Crochet Accessories</title>
+  <meta name="description" content="Handcrafted modern crochet accessories in serene blue & cool tones — heart earrings, bow scrunchies, hair clips, phone charms, and more. Every stitch made by hand." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="style.css" />
@@ -416,12 +416,24 @@
           <label class="form-label" for="productFormCategory">Category *</label>
           <select class="form-input form-select" id="productFormCategory" required>
             <option value="">— Select a category —</option>
-            <option value="Plushies">🐰 Plushies</option>
-            <option value="Bags">👜 Bags</option>
-            <option value="Apparel">🧣 Apparel</option>
-            <option value="Home Decor">🏺 Home Decor</option>
+            <option value="Earrings">💖 Earrings</option>
+            <option value="Scrunchies">🌿 Scrunchies</option>
+            <option value="Hair Accessories">🎀 Hair Accessories</option>
+            <option value="Charms & More">✨ Charms & More</option>
           </select>
           <span class="form-error">Select a category.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="productFormImage">Product Image Path</label>
+          <input class="form-input" id="productFormImage" type="text"
+                 placeholder="e.g. assets/my-product.jpg" />
+          <div class="image-preview-box" id="productFormImagePreview">
+            <span class="image-preview-placeholder">No image selected</span>
+          </div>
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem">
+            Tip: Place your photo in the <strong>assets/</strong> folder first.
+          </p>
         </div>
 
         <div class="form-group" style="flex-direction:row;align-items:center;gap:0.75rem">

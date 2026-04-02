@@ -132,6 +132,7 @@ function openAddProduct() {
   clearFormErrors('productForm');
   document.getElementById('productFormStock').value = 10;
   document.getElementById('productFormAvailable').checked = true;
+  updateImagePreview(''); // Reset preview
   showModal('productFormModal');
 }
 
@@ -149,7 +150,9 @@ function openEditProduct(id) {
   document.getElementById('productFormCategory').value    = product.category;
   document.getElementById('productFormStock').value       = product.stock;
   document.getElementById('productFormAvailable').checked = product.available;
+  document.getElementById('productFormImage').value       = product.image || '';
 
+  updateImagePreview(product.image || ''); // Refresh preview
   clearFormErrors('productForm');
   showModal('productFormModal');
 }
@@ -163,6 +166,7 @@ function submitProductForm(e) {
   const category = document.getElementById('productFormCategory').value;
   const stock    = parseInt(document.getElementById('productFormStock').value, 10);
   const avail    = document.getElementById('productFormAvailable').checked;
+  const imgPath  = document.getElementById('productFormImage').value.trim();
 
   // Validate
   let valid = true;
@@ -178,7 +182,7 @@ function submitProductForm(e) {
   if (adminEditingId) {
     const idx = products.findIndex(p => p.id === adminEditingId);
     if (idx !== -1) {
-      products[idx] = { ...products[idx], name, description: desc, price, category, stock, available: avail };
+      products[idx] = { ...products[idx], name, description: desc, price, category, stock, available: avail, image: imgPath };
       showToast(`"${name}" updated ✓`, 'success');
     }
   } else {
@@ -191,6 +195,7 @@ function submitProductForm(e) {
       stock,
       available: avail,
       featured: false,
+      image: imgPath,
     };
     products.unshift(newProduct);
     showToast(`"${name}" added to inventory ✓`, 'success');
@@ -224,6 +229,18 @@ function escHtml(str) {
   const d = document.createElement('div');
   d.appendChild(document.createTextNode(str));
   return d.innerHTML;
+}
+
+function updateImagePreview(path) {
+  const preview = document.getElementById('productFormImagePreview');
+  if (!path) {
+    preview.innerHTML = '<span class="image-preview-placeholder">No image selected</span>';
+    return;
+  }
+  preview.innerHTML = `
+    <img src="${path}" class="image-preview-img" 
+         onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+    <span class="image-preview-placeholder" style="display:none">⚠️ Invalid image path</span>`;
 }
 
 // ── Show/Hide Admin Dashboard ─────────────────────────────

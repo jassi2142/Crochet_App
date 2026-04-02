@@ -16,34 +16,34 @@ const CATEGORIES = ['Earrings', 'Scrunchies', 'Hair Accessories', 'Charms & More
 
 // Absolute paths to generated product images
 const IMG = {
-  heart:    'C:/Users/WIN/.gemini/antigravity/brain/79c010b9-726a-4c61-b254-182bb12f787f/heart_earrings_1775027319192.png',
-  lily:     'C:/Users/WIN/.gemini/antigravity/brain/79c010b9-726a-4c61-b254-182bb12f787f/lily_flower_earring_1775027350836.png',
-  scrunchie:'C:/Users/WIN/.gemini/antigravity/brain/79c010b9-726a-4c61-b254-182bb12f787f/green_bow_scrunchie_1775027367100.png',
-  hairbow:  'C:/Users/WIN/.gemini/antigravity/brain/79c010b9-726a-4c61-b254-182bb12f787f/hair_bow_clip_1775027462957.png',
-  charms:   'C:/Users/WIN/.gemini/antigravity/brain/79c010b9-726a-4c61-b254-182bb12f787f/mobile_charms_1775027483345.png',
-  bookmark: 'C:/Users/WIN/.gemini/antigravity/brain/79c010b9-726a-4c61-b254-182bb12f787f/crochet_bookmark_1775027507100.png',
+  heart:    'assets/heart_earrings.png',
+  lily:     'assets/lily_flower_earring.png',
+  scrunchie:'assets/green_bow_scrunchie.png',
+  hairbow:  'assets/hair_bow_clip.png',
+  charms:   'assets/mobile_charms.png',
+  bookmark: 'assets/crochet_bookmark.png',
 };
 
 const CATEGORY_CONFIG = {
   'Earrings': {
-    gradient:    'linear-gradient(145deg, #fce8ec, #f9c8d4)',
-    emoji:       '💖',
-    accentColor: '#c41e3a',
+    gradient:    'linear-gradient(145deg, #eef2ff, #c3dafe)',
+    emoji:       '💙',
+    accentColor: '#2563eb',
   },
   'Scrunchies': {
-    gradient:    'linear-gradient(145deg, #d4ede1, #a8d8c0)',
-    emoji:       '🌿',
-    accentColor: '#2d6a4f',
+    gradient:    'linear-gradient(145deg, #f0fdfa, #99f6e4)',
+    emoji:       '🩵',
+    accentColor: '#0d9488',
   },
   'Hair Accessories': {
-    gradient:    'linear-gradient(145deg, #fce0e8, #f9b8cc)',
+    gradient:    'linear-gradient(145deg, #f5f3ff, #ddd6fe)',
     emoji:       '🎀',
-    accentColor: '#b0406a',
+    accentColor: '#7c3aed',
   },
   'Charms & More': {
-    gradient:    'linear-gradient(145deg, #fff4e0, #ffe0a8)',
+    gradient:    'linear-gradient(145deg, #f0f9ff, #bae6fd)',
     emoji:       '✨',
-    accentColor: '#c07a20',
+    accentColor: '#0284c7',
   },
 };
 
@@ -52,7 +52,7 @@ const DEFAULT_PRODUCTS = [
   {
     id: 'p1',
     name: 'Heart Crochet Earrings',
-    description: 'Handcrafted heart-shaped earrings in rich crimson yarn. A bestseller — perfect for gifting or wearing every day. Each pair is uniquely made.',
+    description: 'Handcrafted heart-shaped earrings in deep sapphire blue yarn. A bestseller — perfect for gifting or wearing every day. Each pair is uniquely made.',
     price: 199,
     category: 'Earrings',
     stock: 8,
@@ -129,7 +129,7 @@ const DEFAULT_PRODUCTS = [
   {
     id: 'p8',
     name: 'Rose Flower Hair Pin',
-    description: 'Sweet rose-shaped crochet hairpin in crimson red. Clip it into braids, buns, or half-up styles for an instant handmade charm.',
+    description: 'Sweet rose-shaped crochet hairpin in ocean blue. Clip it into braids, buns, or half-up styles for an instant handmade charm.',
     price: 169,
     category: 'Hair Accessories',
     stock: 9,
